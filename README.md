@@ -1,6 +1,6 @@
 # Weather App - MVVM
 
-Weather app from OpenWeather APIs in MVVM and TDD approach.
+Weather app from using OpenWeather APIs in MVVM TDD.
 
 
 ## Contributing
