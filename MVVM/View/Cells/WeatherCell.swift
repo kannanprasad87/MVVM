@@ -9,7 +9,7 @@ import UIKit
 
 class WeatherCell: UICollectionViewCell {
     
-    var currentWeather: WeatherResponse?
+    var currentWeather: CurrentWeather?
     
     override func updateConfiguration(using state: UICellConfigurationState) {
         
@@ -23,6 +23,4 @@ class WeatherCell: UICollectionViewCell {
         contentConfiguration = newConfiguration
         
     }
-    
-    
 }

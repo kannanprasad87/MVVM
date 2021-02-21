@@ -30,6 +30,7 @@ class WeatherViewController: UIViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0.0),
         ])
         updateList()
+        self.viewModel.getWeatherForSavedLocations()
     }
 
     @IBAction func addCity(){
@@ -72,7 +73,7 @@ enum Section: CaseIterable {
 
 private extension WeatherViewController {
     func updateList() {
-        var snapshot = NSDiffableDataSourceSnapshot<Section,WeatherResponse>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section,CurrentWeather>()
         snapshot.appendSections(Section.allCases)
         snapshot.appendItems(viewModel.weather, toSection: .all)
         dataSource.apply(snapshot,animatingDifferences: true)
@@ -103,10 +104,10 @@ private extension WeatherViewController {
 }
 
 private extension WeatherViewController {
-    func configureDataSource() -> UICollectionViewDiffableDataSource<Section, WeatherResponse>{
+    func configureDataSource() -> UICollectionViewDiffableDataSource<Section, CurrentWeather>{
 
         let cellRegistration = makeCellRegistration()
-        return UICollectionViewDiffableDataSource<Section, WeatherResponse>(
+        return UICollectionViewDiffableDataSource<Section, CurrentWeather>(
             collectionView: collectionView,
             cellProvider: { collectionView, indexPath, item in
                 collectionView.dequeueConfiguredReusableCell(
@@ -121,15 +122,9 @@ private extension WeatherViewController {
 }
 
 private extension WeatherViewController {
-    func makeCellRegistration() -> UICollectionView.CellRegistration<WeatherCell, WeatherResponse> {
+    func makeCellRegistration() -> UICollectionView.CellRegistration<WeatherCell, CurrentWeather> {
         UICollectionView.CellRegistration { cell, indexPath, response in
-
             cell.currentWeather = response
-//            var content = cell.defaultContentConfiguration()
-//            content.text =  response.self.locationName
-//            content.secondaryText = response.self.currentTemperature
-//            content.image = response.self.weatherIcon
-//            cell.contentConfiguration = content
         }
     }
 }

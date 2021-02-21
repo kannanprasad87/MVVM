@@ -1,0 +1,47 @@
+{
+  "coord": {
+    "lon": -1.7521,
+    "lat": 53.7939
+  },
+  "weather": [
+    {
+      "id": 804,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "icon": "04d"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 2.22,
+    "feels_like": -2.8,
+    "temp_min": 1.67,
+    "temp_max": 2.78,
+    "pressure": 1020,
+    "humidity": 10,
+    "sea_level": 1020,
+    "grnd_level": 1005
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 1.79,
+    "deg": 360,
+    "gust": 4.02
+  },
+  "clouds": {
+    "all": 100
+  },
+  "dt": 1613297739,
+  "sys": {
+    "type": 3,
+    "id": 2013235,
+    "country": "GB",
+    "sunrise": 1613287707,
+    "sunset": 1613322849
+  },
+  "timezone": 0,
+  "id": 2654993,
+  "name": "Bradford",
+  "cod": 200
+}
+

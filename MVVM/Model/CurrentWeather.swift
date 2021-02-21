@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct WeatherResponse : Codable,Hashable {
+struct CurrentWeather : Codable,Hashable {
 
     let coord : Coord?
     let weather : [Weather]?
@@ -29,7 +29,7 @@ struct WeatherResponse : Codable,Hashable {
         hasher.combine(id)
     }
 
-    static func == (lhs: WeatherResponse, rhs: WeatherResponse) -> Bool {
+    static func == (lhs: CurrentWeather, rhs: CurrentWeather) -> Bool {
         return lhs.id ==  rhs.id
     }
 
@@ -87,6 +87,6 @@ struct WeatherResponse : Codable,Hashable {
     }
 
     var feelsLikeTemperature: String? {
-        return "Feels Line \(self.main?.feelsLike ?? 0)°C"
+        return "Feels Like \(self.main?.feelsLike ?? 0)°C"
     }
 }

@@ -14,7 +14,6 @@ struct Clouds : Codable,Hashable {
         return lhs.uuid == rhs.uuid
     }
 	enum CodingKeys: String, CodingKey {
-
 		case all = "all"
 	}
 

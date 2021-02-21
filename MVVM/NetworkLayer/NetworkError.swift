@@ -8,25 +8,37 @@
 import Foundation
 
 enum NetworkError: Error {
-    case requestFailed
-    case jsonConversionFailure
-    case invalidData
-    case unauthorisedResponse
-    case httpErrorResponse
-    case jsonParsingFailure
-    case invalidURL
-    case customError(message:String)
+    case informationalError
+    case noError
+    case redirectionError
+    case clientError
+    case serverError
+    case undefinedError
+
+    case failedRequestError
+    case jsonConversionError
+    case invalidDataError
+    case unauthorisedResponseError
+    case httpResponseError
+    case jsonParsingError
+    case invalidURLError
 
     var localizedDescription: String {
         switch self {
-        case .requestFailed: return "Request Failed"
-        case .invalidData: return "Invalid Data"
-        case .unauthorisedResponse: return "Unauthorised web service access"
-        case .httpErrorResponse: return "Response Unsuccessful"
-        case .jsonParsingFailure: return "JSON Parsing Failure"
-        case .jsonConversionFailure: return "JSON Conversion Failure"
-        case .invalidURL: return "Invalid URL"
-        case .customError(let message): return "\(message)"
+        case .informationalError: return "Informational error"
+        case .noError: return "No error"
+        case .redirectionError: return "Redirection error"
+        case .clientError: return "Client error occurred"
+        case .serverError: return "Service error occurred"
+        case .undefinedError: return "Undefined error occurred"
+    
+        case .failedRequestError: return "Request failed"
+        case .invalidDataError: return "received invalid data from server"
+        case .unauthorisedResponseError: return "Unauthorised web service access"
+        case .httpResponseError: return "Response unsuccessful"
+        case .jsonParsingError: return "Failed to decode received data"
+        case .jsonConversionError: return "Failed to encode data"
+        case .invalidURLError: return "Invalid URL"
         }
     }
 }

@@ -16,39 +16,47 @@ final class NetworkClient:NetworkClientProtocol {
         let fetchTask = session.dataTask(with: request) { (data, response, error) in
 
             guard let httpResponse = response as? HTTPURLResponse else {
-                completion(Result.failure(.requestFailed))
+                completion(Result.failure(.failedRequestError))
                 return
             }
-            if httpResponse.statusCode == 200 {
+            switch httpResponse.responseType {
+            case .noError:
                 if let data = data {
                     do {
                         let genericModel = try JSONDecoder().decode(decodingType, from: data)
                         completion(.success(genericModel))
                     }  catch DecodingError.keyNotFound(let key, let context) {
                         Swift.print("could not find key \(key) in JSON: \(context.debugDescription)")
-                        completion(.failure(.invalidData))
+                        completion(.failure(.invalidDataError))
                     } catch DecodingError.valueNotFound(let type, let context) {
                         Swift.print("could not find type \(type) in JSON: \(context.debugDescription)")
-                        completion(.failure(.invalidData))
+                        completion(.failure(.invalidDataError))
                     } catch DecodingError.typeMismatch(let type, let context) {
                         Swift.print("type mismatch for type \(type) in JSON: \(context.debugDescription)")
-                        completion(.failure(.invalidData))
+                        completion(.failure(.invalidDataError))
                     } catch DecodingError.dataCorrupted(let context) {
                         Swift.print("data found to be corrupted in JSON: \(context.debugDescription)")
-                        completion(.failure(.invalidData))
+                        completion(.failure(.invalidDataError))
                     } catch let error as NSError {
                         NSLog("Error in read(from:ofType:) domain= \(error.domain), description= \(error.localizedDescription)")
-                        completion(.failure(.invalidData))
+                        completion(.failure(.invalidDataError))
                     }
                 } else {
-                    completion(.failure(.invalidData))
+                    completion(.failure(.invalidDataError))
                 }
-            } else if httpResponse.statusCode == 401 {
-                completion(.failure(.unauthorisedResponse))
-            }else if httpResponse.statusCode == 404 {
-                completion(.failure(.invalidURL))
-            }else {
-                completion(.failure(.httpErrorResponse))
+            case .redirectionError,
+                 .informationalError,
+                 .clientError,
+                 .serverError,
+                 .undefinedError,
+                 .failedRequestError,
+                 .jsonConversionError,
+                 .invalidDataError,
+                 .unauthorisedResponseError,
+                 .httpResponseError,
+                 .jsonParsingError,
+                 .invalidURLError:
+                    completion(.failure(httpResponse.responseType))
             }
         }
         fetchTask.resume()

@@ -9,7 +9,7 @@ import UIKit
 
 struct WeatherCellContentConfiguration: UIContentConfiguration, Hashable {
 
-    var weather: WeatherResponse?
+    var weather: CurrentWeather?
 
     func makeContentView() -> UIView & UIContentView {
         return WeatherCellContentView(configuration: self)

@@ -19,6 +19,7 @@ struct Networking {
 
         struct Path {
             static let Weather = "weather"
+            static let Group = "group"
         }
     }
 }
